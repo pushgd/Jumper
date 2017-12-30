@@ -28,8 +28,8 @@ import game.GameManager;
 public class MainGameLoop extends ApplicationAdapter implements InputProcessor
 {
     public static final float MS_FOR_EACH_FRAME = 1000f / 60;
-    public static final int VIEWPORT_WIDTH = 1280;
-    public static final int VIEWPORT_HEIGHT = 720;
+    public static final int VIEWPORT_WIDTH = 720;
+    public static final int VIEWPORT_HEIGHT = 1280;
     SpriteBatch spriteBatch;
     double previous = TimeUtils.millis();
     double lag = 0.0;
@@ -54,6 +54,8 @@ public class MainGameLoop extends ApplicationAdapter implements InputProcessor
         Gdx.input.setInputProcessor(this);
         GameManager.onGameStart();
 
+        Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
+
 
 
 
@@ -71,6 +73,8 @@ public class MainGameLoop extends ApplicationAdapter implements InputProcessor
         double elapsed = current - previous;
         previous = current;
         lag += elapsed;
+
+        GameManager.phoneOrientation(Gdx.input.getAccelerometerX(),Gdx.input.getAccelerometerY(),Gdx.input.getAccelerometerZ());
         while (lag >= MS_FOR_EACH_FRAME)
         {
 
@@ -117,29 +121,6 @@ public class MainGameLoop extends ApplicationAdapter implements InputProcessor
     @Override
     public boolean keyDown(int keycode)
     {
-
-
-        if (keycode == Input.Keys.LEFT)
-        {
-            camera.translate(32, 0);
-        }
-        if (keycode == Input.Keys.RIGHT)
-        {
-            camera.translate(-32, 0);
-
-        }
-        if (keycode == Input.Keys.UP)
-        {
-            camera.translate(0, 32);
-        }
-        if (keycode == Input.Keys.DOWN)
-        {
-
-            camera.translate(0, -32);
-
-        }
-
-
         GameManager.keyDown(keycode);
         return false;
     }
@@ -200,6 +181,21 @@ public class MainGameLoop extends ApplicationAdapter implements InputProcessor
         Debug("Paused");
     }
 
+
+    public float getXRotation()
+        {
+            return Gdx.input.getAccelerometerX();
+        }
+
+    public float getYRotation()
+        {
+            return Gdx.input.getAccelerometerY();
+        }
+
+    public float getZRotation()
+        {
+            return Gdx.input.getAccelerometerZ();
+        }
     @Override
     public void resize(int width, int height)
     {

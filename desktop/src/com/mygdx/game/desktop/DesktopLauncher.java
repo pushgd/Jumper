@@ -7,6 +7,6 @@ import com.libGDX.engine.Base.MainGameLoop;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MainGameLoop(), "Test",1280,720);
+		new LwjglApplication(new MainGameLoop(), "Test",720,1280);
 	}
 }

@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libGDX.engine.Base.aniamtion.SpriteAnimation;
 import com.libGDX.engine.Base.collision.Collision;
 
+import game.GameManager;
+
 /**
  * Created by Dhande on 27-02-2017.
  */
@@ -47,5 +49,23 @@ public abstract class GameObject implements com.libGDX.engine.Base.aniamtion.Ani
 
     public abstract void deallocate();
 
+
+
+
+
+    public float getOrientationX()
+        {
+           return GameManager.getOrientationX();
+        }
+
+    public float getOrientationY()
+        {
+            return GameManager.getOrientationY();
+        }
+
+    public float getOrientationZ()
+        {
+            return GameManager.getOrientationZ();
+        }
 
 }

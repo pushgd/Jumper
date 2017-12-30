@@ -10,28 +10,39 @@ import java.util.ArrayList;
  */
 
 public class GameObjectManager
-{
-    ArrayList<GameObject> gameObjectList;
-
-    private GameObjectManager()
     {
+        private static ArrayList<GameObject> gameObjectList;
 
+        private GameObjectManager()
+            {
+
+
+            }
+
+        public static void init()
+            {
+                gameObjectList = new ArrayList<GameObject>(10);
+            }
+        public static void update()
+            {
+                for (GameObject g : gameObjectList)
+                    {
+                        g.update();
+                    }
+            }
+
+
+        public static void paint(SpriteBatch spriteBatch)
+            {
+                for (GameObject g : gameObjectList)
+                    {
+                        g.paint(spriteBatch);
+                    }
+            }
+
+        public static void addGameObject(GameObject gameObject)
+            {
+                gameObjectList.add(gameObject);
+            }
 
     }
-
-    public static void update()
-    {
-
-
-
-
-    }
-
-
-
-    public static void paint(SpriteBatch spriteBatch)
-    {
-
-    }
-
-}

@@ -8,66 +8,70 @@ import com.libGDX.engine.Debug.Debug;
  */
 
 public abstract class Scene
-{
-    int ID;
-
-    abstract public void update();
-
-    abstract public void pause();
-
-    abstract public void paint(SpriteBatch spriteBatch);
-
-    public void onExit()
     {
-        Debug.print("Exiting scene with id " + ID);
+        int ID;
+
+        abstract public void update();
+
+        abstract public void pause();
+
+        abstract public void paint(SpriteBatch spriteBatch);
+
+        public void onExit()
+            {
+                Debug.print("Exiting scene with id " + ID);
+            }
+
+
+        public void keyDown(int keycode)
+            {
+
+            }
+
+
+        public void keyUp(int keycode)
+            {
+
+            }
+
+
+        public void keyTyped(char character)
+            {
+
+            }
+
+
+        public void touchDown(int screenX, int screenY, int pointer, int button)
+            {
+
+            }
+
+
+        public void touchUp(int screenX, int screenY, int pointer, int button)
+            {
+            }
+
+
+        public void touchDragged(int screenX, int screenY, int pointer)
+            {
+
+            }
+
+
+        public void mouseMoved(int screenX, int screenY)
+            {
+
+            }
+
+
+        public void scrolled(int amount)
+            {
+
+            }
+
+        public void phoneOrientation(float x, float y, float z)
+            {
+
+            }
+
     }
-
-
-    public void keyDown(int keycode)
-    {
-
-    }
-
-
-    public void keyUp(int keycode)
-    {
-
-    }
-
-
-    public void keyTyped(char character)
-    {
-
-    }
-
-
-    public void touchDown(int screenX, int screenY, int pointer, int button)
-    {
-
-    }
-
-
-    public void touchUp(int screenX, int screenY, int pointer, int button)
-    {
-    }
-
-
-    public void touchDragged(int screenX, int screenY, int pointer)
-    {
-
-    }
-
-
-    public void mouseMoved(int screenX, int screenY)
-    {
-
-    }
-
-
-    public void scrolled(int amount)
-    {
-
-    }
-
-
-}
