@@ -1,7 +1,6 @@
 package game.scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,9 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.libGDX.engine.Base.gameComponents.Scene;
 import com.libGDX.engine.Base.render.Bitmap;
 
-import game.GameManager;
 import game.gameObjects.TestGameObject2;
-import game.gameObjects.TestObject;
 
 /**
  * Created by Dhande on 26-02-2017.
@@ -61,7 +58,7 @@ int counter =0;
 
         bf.draw(spriteBatch, "FPS " + Gdx.graphics.getFramesPerSecond(), 0, 0);
 
-        go2.paintEntity(spriteBatch);
+//        go2.paintEntity(spriteBatch, , );
 //        Bitmap.draw(spriteBatch,tileSet, 0,0);
 counter++;
 if(counter>60)

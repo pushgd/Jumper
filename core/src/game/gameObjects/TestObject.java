@@ -48,7 +48,7 @@ public class TestObject extends GameObject
     }
 
     @Override
-    public void paint(SpriteBatch spriteBatch)
+    public void paint(SpriteBatch spriteBatch, float worldX, float worldY)
     {
         animation.paint(spriteBatch, position.x, position.y);
         Bitmap.Debug.drawText(spriteBatch,position+"  "+animation.getHeight(),position.x,position.y);

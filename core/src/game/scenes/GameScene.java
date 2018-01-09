@@ -1,8 +1,9 @@
 package game.scenes;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.libGDX.engine.Base.gameComponents.GameObject;
 import com.libGDX.engine.Base.gameComponents.Scene;
+import com.libGDX.engine.Base.gameComponents.Tilemap;
 import com.libGDX.engine.Base.render.Bitmap;
 
 import game.GameManager;
@@ -15,39 +16,74 @@ import game.gameObjects.Frog;
 
 public class GameScene extends Scene
     {
-        float rotationX, rotationY, rotationZ;
+    public static GameScene instance;
+    float rotationX, rotationY, rotationZ;
+    public Tilemap tilemap;
+    Bitmap backGround;
+    public  int worldX=0,worldY = 0;
+    public GameScene()
+        {
+        instance = this;
+        GameObjectManager.init();
+        GameObjectManager.addGameObject(new Frog());
+        tilemap = new Tilemap("map/TileMap.tmx");
+        backGround = new Bitmap("bg.png");
+        worldX = 64*3;
+        }
 
-        public GameScene()
+    @Override
+    public void update()
+        {
+        GameObjectManager.update();
+        }
+
+    @Override
+    public void pause()
+        {
+
+        }
+
+
+
+    @Override
+    public void paint(SpriteBatch spriteBatch)
+        {
+
+Bitmap.draw(spriteBatch,backGround,0,0);
+        GameObjectManager.paint(spriteBatch,worldX,worldY);
+//        Bitmap.Debug.drawText(spriteBatch, "X = " + GameManager.getOrientationX(), GameManager.SCREEN_WIDTH * 0.3f, GameManager.SCREEN_HEIGHT / 2);
+        tilemap.paint(spriteBatch, worldX, worldY);
+        }
+
+    @Override
+    public void phoneOrientation(float x, float y, float z)
+        {
+        rotationZ = z;
+        rotationX = x;
+        rotationY = y;
+
+        }
+
+    @Override
+    public void keyDown(int keycode)
+        {
+        if (keycode == Input.Keys.LEFT)
             {
-                GameObjectManager.init();
-                GameObjectManager.addGameObject(new Frog());
+            worldX-=5;
             }
 
-        @Override
-        public void update()
+        if (keycode == Input.Keys.RIGHT)
             {
-                GameObjectManager.update();
+            worldX+=5;
             }
-
-        @Override
-        public void pause()
+        if (keycode == Input.Keys.UP)
             {
-
+            worldY-=5;
             }
-
-        @Override
-        public void paint(SpriteBatch spriteBatch)
+        if (keycode == Input.Keys.DOWN)
             {
-                GameObjectManager.paint(spriteBatch);
-                Bitmap.Debug.drawText(spriteBatch, "X = " + GameManager.getOrientationX() , GameManager.SCREEN_WIDTH * 0.3f, GameManager.SCREEN_HEIGHT / 2);
+            worldY+=5;
             }
-
-        @Override
-        public void phoneOrientation(float x, float y, float z)
-            {
-                rotationZ = z;
-                rotationX = x;
-                rotationY = y;
-
-            }
+        super.keyDown(keycode);
+        }
     }

@@ -30,7 +30,7 @@ public class TestGameObject2 extends GameObject
     }
 
     @Override
-    public void paint(SpriteBatch spriteBatch)
+    public void paint(SpriteBatch spriteBatch, float worldX, float worldY)
     {
         c.paint(spriteBatch);
     }

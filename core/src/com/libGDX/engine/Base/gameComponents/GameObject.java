@@ -36,14 +36,14 @@ public abstract class GameObject implements com.libGDX.engine.Base.aniamtion.Ani
         update();
     }
 
-    public final void paintEntity(SpriteBatch spriteBatch)
+    public final void paintEntity(SpriteBatch spriteBatch, float worldX, float worldY)
     {
-        paint(spriteBatch);
+        paint(spriteBatch,worldX , worldY);
     }
 
     public abstract void update();
 
-    public abstract void paint(SpriteBatch spriteBatch);
+    public abstract void paint(SpriteBatch spriteBatch, float worldX, float worldY);
 
     public abstract void onCollision(Collision collision, Collision otherCollision);
 

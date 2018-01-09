@@ -32,11 +32,11 @@ public class GameObjectManager
             }
 
 
-        public static void paint(SpriteBatch spriteBatch)
+        public static void paint(SpriteBatch spriteBatch,float worldx,float worldY)
             {
                 for (GameObject g : gameObjectList)
                     {
-                        g.paint(spriteBatch);
+                        g.paint(spriteBatch,worldx ,worldY );
                     }
             }
 
