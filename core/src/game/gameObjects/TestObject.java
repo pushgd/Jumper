@@ -27,10 +27,8 @@ public class TestObject extends GameObject
         animation.addAnimation(new TextureAtlas("melee.atlas"), 700);
         animation.setState(0, 1, true);
         position = new Vector2D(100, 100);
-        collision = new Collision(this, 0, 0, 40, 40);
-        collision.ID = 1;
-        collision2 = new Collision(this, animation.getWidth() , animation.getHeight() / 2, 40, 40);
-        collision2.ID = 2;
+        collision = new Collision(this, 1, 0, 0, 40, 40);
+        collision2 = new Collision(this, 2, animation.getWidth() , animation.getHeight() / 2, 40, 40);
         CollisionManager.addCollision(collision);
         CollisionManager.addCollision(collision2);
     }
@@ -42,8 +40,8 @@ public class TestObject extends GameObject
 //        Debug.print("width " + animation.getWidth());
 //        position.x++;
         animation.update();
-        collision.update(collision.position.x, collision.position.y, animation.getWidth(), animation.getHeight());
-        collision2.update(animation.getWidth(), collision2.position.y, animation.getWidth() / 2, animation.getHeight() / 2);
+        collision.update(collision.localPosition.x, collision.localPosition.y, animation.getWidth(), animation.getHeight());
+        collision2.update(animation.getWidth(), collision2.localPosition.y, animation.getWidth() / 2, animation.getHeight() / 2);
 
     }
 

@@ -31,6 +31,12 @@ public class CollisionManager
         for (int i = 0; i < collisionList.size(); i++)
         {
             Collision c1 = collisionList.get(i);
+            if (c1.remove)
+            {
+                i--;
+                collisionList.remove(i);
+                continue;
+            }
             for (int j = i; j < collisionList.size(); j++)
             {
                 Collision c2 = collisionList.get(j);
@@ -41,8 +47,8 @@ public class CollisionManager
                 }
                 if (c1.isColliding(c2))
                 {
-                    c1.owner.onCollision(c1,c2);
-                    c2.owner.onCollision(c2,c1);
+                    c1.owner.onCollision(c1, c2);
+                    c2.owner.onCollision(c2, c1);
 
                 }
 

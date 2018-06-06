@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.libGDX.engine.Base.aniamtion.SpriteAnimation;
 import com.libGDX.engine.Base.collision.Collision;
 
+import game.CollisionManager;
 import game.GameManager;
 
 /**
@@ -11,7 +12,7 @@ import game.GameManager;
  */
 
 public abstract class GameObject implements com.libGDX.engine.Base.aniamtion.AnimationEventListener
-{
+    {
     //From BabyStep
     private static int baseId = 0;
 
@@ -38,7 +39,7 @@ public abstract class GameObject implements com.libGDX.engine.Base.aniamtion.Ani
 
     public final void paintEntity(SpriteBatch spriteBatch, float worldX, float worldY)
     {
-        paint(spriteBatch,worldX , worldY);
+        paint(spriteBatch, worldX, worldY);
     }
 
     public abstract void update();
@@ -49,23 +50,27 @@ public abstract class GameObject implements com.libGDX.engine.Base.aniamtion.Ani
 
     public abstract void deallocate();
 
-
-
+    public Collision createCollision(int ID,float localX, float localY, float width, float height)
+    {
+        Collision newCollision = new Collision(this, ID, localX, localY, width, height);
+        CollisionManager.addCollision(newCollision);
+        return newCollision;
+    }
 
 
     public float getOrientationX()
-        {
-           return GameManager.getOrientationX();
-        }
+    {
+        return GameManager.getOrientationX();
+    }
 
     public float getOrientationY()
-        {
-            return GameManager.getOrientationY();
-        }
+    {
+        return GameManager.getOrientationY();
+    }
 
     public float getOrientationZ()
-        {
-            return GameManager.getOrientationZ();
-        }
+    {
+        return GameManager.getOrientationZ();
+    }
 
-}
+    }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -16,7 +17,7 @@ import com.libGDX.engine.Base.render.Bitmap;
 import game.GameManager;
 
 public class MainGameLoop extends ApplicationAdapter implements InputProcessor
-    {
+{
     public static final float MS_FOR_EACH_FRAME = 1000f / 60;
     public static final int VIEWPORT_WIDTH = 720;
     public static final int VIEWPORT_HEIGHT = 1280;
@@ -25,12 +26,13 @@ public class MainGameLoop extends ApplicationAdapter implements InputProcessor
     double lag = 0.0;
     public OrthographicCamera camera;
     Viewport viewport;
-
+    private Vector3 touch;
 
     @Override
     public void create()
-        {
+    {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        touch = new Vector3();
         camera = new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         camera.setToOrtho(true);
         camera.position.set(VIEWPORT_WIDTH / 2, VIEWPORT_HEIGHT / 2, 0);
@@ -44,11 +46,11 @@ public class MainGameLoop extends ApplicationAdapter implements InputProcessor
 
         Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
 
-        }
+    }
 
     @Override
     public void render()
-        {
+    {
 
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -61,15 +63,15 @@ public class MainGameLoop extends ApplicationAdapter implements InputProcessor
 
         GameManager.phoneOrientation(Gdx.input.getAccelerometerX(), Gdx.input.getAccelerometerY(), Gdx.input.getAccelerometerZ());
         if (lag > 4 * MS_FOR_EACH_FRAME)
-            {
+        {
             lag = MS_FOR_EACH_FRAME;
-            }
+        }
         while (lag >= MS_FOR_EACH_FRAME)
-            {
+        {
 
             GameManager.update();
             lag -= MS_FOR_EACH_FRAME;
-            }
+        }
 
 
         spriteBatch.setProjectionMatrix(camera.combined);
@@ -90,110 +92,115 @@ public class MainGameLoop extends ApplicationAdapter implements InputProcessor
 //        tiledMapRenderer.render(new int[]{1});
 
 
-        }
+    }
 
 
     @Override
     public void dispose()
-        {
+    {
         spriteBatch.dispose();
 
 
-        }
+    }
 
 
     public void Debug(String s)
-        {
+    {
         Gdx.app.debug("Test", s);
-        }
+    }
 
 
     @Override
     public boolean keyDown(int keycode)
-        {
+    {
         GameManager.keyDown(keycode);
         return false;
-        }
+    }
 
     @Override
     public boolean keyUp(int keycode)
-        {
+    {
         GameManager.keyUp(keycode);
         return false;
-        }
+    }
 
     @Override
     public boolean keyTyped(char character)
-        {
+    {
         return false;
-        }
+    }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
-        {
-        GameManager.touchDown(screenX, screenY, pointer, button);
+    {
+        touch.x = screenX;
+        touch.y = screenY;
+        camera.unproject(touch);
+        GameManager.touchDown((int) touch.x, (int) touch.y, pointer, button);
         return false;
-        }
+    }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button)
-        {
-
-        GameManager.touchUp(screenX, screenY, pointer, button);
+    {
+        touch.x = screenX;
+        touch.y = screenY;
+        camera.unproject(touch);
+        GameManager.touchUp((int) touch.x, (int) touch.y, pointer, button);
         return false;
-        }
+    }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer)
-        {
+    {
         GameManager.touchDragged(screenX, screenY, pointer);
         return false;
-        }
+    }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY)
-        {
+    {
         GameManager.mouseMoved(screenX, screenY);
         return false;
-        }
+    }
 
     @Override
     public boolean scrolled(int amount)
-        {
+    {
         return false;
-        }
+    }
 
     @Override
     public void pause()
-        {
+    {
         super.pause();
         GameManager.onPause();
         Debug("Paused");
-        }
+    }
 
 
     public float getXRotation()
-        {
+    {
         return Gdx.input.getAccelerometerX();
-        }
+    }
 
     public float getYRotation()
-        {
+    {
         return Gdx.input.getAccelerometerY();
-        }
+    }
 
     public float getZRotation()
-        {
+    {
         return Gdx.input.getAccelerometerZ();
-        }
+    }
 
     @Override
     public void resize(int width, int height)
-        {
+    {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
         viewport.update(width, height);
 
-        }
     }
+}

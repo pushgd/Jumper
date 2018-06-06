@@ -18,7 +18,7 @@ public class TestGameObject2 extends GameObject
     public TestGameObject2()
     {
         position = new Vector2D(0, 0);
-        c = new Collision(this, 0, 0, 40, 40);
+        c = new Collision(this, 1, 0, 0, 40, 40);
         CollisionManager.addCollision(c);
 
     }

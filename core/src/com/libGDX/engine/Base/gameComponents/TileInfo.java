@@ -9,4 +9,10 @@ public class TileInfo
     public int id;
     public int x;
     public int y;
+
+        @Override
+        public String toString()
+        {
+            return "ID = "+id+" X = "+x+"Y = "+y;
+        }
     }

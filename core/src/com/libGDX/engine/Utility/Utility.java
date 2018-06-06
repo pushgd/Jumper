@@ -33,4 +33,23 @@ public class Utility
         return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
     }
 
+
+    public static float lerp(float start, float end, float percentage)
+    {
+        return start + (end - start) * percentage;
+    }
+
+    public static float clamp(float x, float lowerBound, float upperbound)
+    {
+        if (x < lowerBound)
+        {
+            return lowerBound;
+        } else if (x > upperbound)
+        {
+            return upperbound;
+        } else
+        {
+            return x;
+        }
+    }
 }
